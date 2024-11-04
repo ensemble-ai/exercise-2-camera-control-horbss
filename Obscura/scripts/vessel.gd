@@ -8,7 +8,7 @@ const RADIUS:float = 0.5
 const HEIGHT:float = RADIUS * 2.0
 const WIDTH:float = RADIUS * 2.0
 
-const BASE_SPEED = 50
+const BASE_SPEED = 25
 const HYPER_SPEED = 300
 
 func _physics_process(_delta):

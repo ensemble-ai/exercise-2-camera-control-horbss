@@ -1,10 +1,9 @@
 class_name PushBox
 extends CameraControllerBase
 
-
 @export var box_width:float = 10.0
 @export var box_height:float = 10.0
-
+var is_current:bool = false
 
 func _ready() -> void:
 	super()
@@ -13,8 +12,13 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	if !current:
+		is_current = false
 		return
 	
+	if !is_current: 
+		target.global_position = global_position
+		is_current = true
+		
 	if draw_camera_logic:
 		draw_logic()
 	
@@ -76,6 +80,5 @@ func draw_logic() -> void:
 	mesh_instance.global_transform = Transform3D.IDENTITY
 	mesh_instance.global_position = Vector3(global_position.x, target.global_position.y, global_position.z)
 	
-	#mesh is freed after one update of _process
 	await get_tree().process_frame
 	mesh_instance.queue_free()
